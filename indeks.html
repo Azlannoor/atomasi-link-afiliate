@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lensa Si Oren - Rekomendasi Produk</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f5f5f5; margin: 0; padding: 0; }
+        header { background-color: #ee4d2d; color: white; padding: 20px; text-align: center; }
+        .container { max-width: 600px; margin: 20px auto; padding: 0 15px; }
+        .search-box { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px; outline: none; }
+        .search-box:focus { border-color: #ee4d2d; }
+        .product-card { background: white; padding: 15px; margin-bottom: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; transition: transform 0.2s; }
+        .product-card:hover { transform: translateY(-3px); }
+        .product-title { font-size: 16px; font-weight: bold; color: #333; margin-bottom: 5px; }
+        .btn-beli { background-color: #ee4d2d; color: white; padding: 8px 15px; text-decoration: none; border-radius: 5px; font-size: 14px; font-weight: bold; white-space: nowrap; margin-left: 10px;}
+        .btn-beli:hover { background-color: #d73a1c; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lensa Si Oren</h1>
+        <p>Kumpulan Rekomendasi Produk Pilihan</p>
+    </header>
+    <div class="container">
+        <input type="text" id="searchInput" class="search-box" placeholder="🔍 Cari nama produk di sini...">
+        
+        <div id="productList">
+            <p style="text-align:center;">Memuat produk...</p>
+        </div>
+    </div>
+
+    <script>
+        // Mengambil data barang dari file data.json
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                const productList = document.getElementById('productList');
+                const searchInput = document.getElementById('searchInput');
+
+                // Fungsi untuk menampilkan produk
+                function displayProducts(products) {
+                    productList.innerHTML = '';
+                    if(products.length === 0) {
+                        productList.innerHTML = '<p style="text-align:center;">Produk tidak ditemukan 😥</p>';
+                        return;
+                    }
+                    products.forEach(item => {
+                        const card = document.createElement('div');
+                        card.className = 'product-card';
+                        card.innerHTML = `
+                            <div>
+                                <div class="product-title">${item.nama}</div>
+                            </div>
+                            <a href="${item.link}" target="_blank" class="btn-beli">Lihat</a>
+                        `;
+                        productList.appendChild(card);
+                    });
+                }
+
+                // Tampilkan semua produk pertama kali
+                displayProducts(data);
+
+                // Fitur Pencarian Real-time
+                searchInput.addEventListener('keyup', (e) => {
+                    const term = e.target.value.toLowerCase();
+                    const filtered = data.filter(item => item.nama.toLowerCase().includes(term));
+                    displayProducts(filtered);
+                });
+            })
+            .catch(error => {
+                document.getElementById('productList').innerHTML = '<p style="text-align:center; color:red;">Gagal memuat data produk.</p>';
+            });
+    </script>
+</body>
+</html>
