@@ -35,7 +35,7 @@
             animation: bounceIn 0.4s ease-out both;
         }
         .link-card:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 5px 15px rgba(0,0,0,0.1); background-color: var(--primary-color); color: white; }
-        .link-card span { display: block; margin-top: 4px; } /* Untuk Fitur Unggul */
+        .link-card span { display: block; margin-top: 4px; }
 
         /* --- DESAIN PAGINATION --- */
         .pagination { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; margin-bottom: 30px; }
@@ -55,7 +55,7 @@
 
     <div class="links-container">
         
-        <input type="text" id="searchInput" placeholder="🔍 Cari nama barang..." onkeyup="filterLinks()">
+        <input type="text" id="searchInput" placeholder="🔍 Cari nama barang atau nomor..." onkeyup="filterLinks()">
 
         <div class="category-title">🔥 Racun Gadget & Viral</div>
         
@@ -77,7 +77,7 @@
     <div class="footer">© 2026 Lensa Si Oren. Managed by Abdul.</div>
 
     <script>
-        const itemsPerPage = 10;
+        const itemsPerPage = 10; // Menampilkan 10 link per halaman
         let currentPage = 1;
         let allProducts = [];
 
@@ -85,7 +85,13 @@
         fetch('data.json')
             .then(response => response.json())
             .then(data => {
-                allProducts = data;
+                // MENGURUTKAN DATA BERDASARKAN ANGKA DI DEPAN (1, 2, 3...)
+                allProducts = data.sort((a, b) => {
+                    // Mengambil angka di awal kalimat, jika tidak ada angka anggap urutan ke-999999
+                    let angkaA = parseInt(a.nama) || 999999;
+                    let angkaB = parseInt(b.nama) || 999999;
+                    return angkaA - angkaB; // Urutkan dari kecil ke besar (Ascending)
+                });
                 renderLinks();
             })
             .catch(err => {
@@ -109,23 +115,24 @@
             const startIndex = (currentPage - 1) * itemsPerPage;
             const endIndex = startIndex + itemsPerPage;
 
-            linkWrapper.innerHTML = ''; // Bersihkan loading
+            linkWrapper.innerHTML = ''; // Bersihkan list sebelumnya
 
             if (filteredProducts.length === 0) {
                 linkWrapper.innerHTML = "<p style='text-align:center; font-size:0.8rem;'>Produk tidak ditemukan.</p>";
             } else {
+                // Hanya memotong (slice) 10 data untuk halaman yang sedang aktif
                 const pageItems = filteredProducts.slice(startIndex, endIndex);
                 pageItems.forEach(item => {
                     const a = document.createElement('a');
                     a.href = item.link;
                     a.className = 'link-card';
                     a.target = '_blank';
-                    a.innerHTML = item.nama; // Pakai innerHTML agar tag <br> dan <span> dari bot terbaca
+                    a.innerHTML = item.nama; 
                     linkWrapper.appendChild(a);
                 });
             }
 
-            // Update Info Halaman
+            // Update Status Tombol dan Info Halaman
             document.getElementById('pageInfo').innerText = `Hal ${currentPage} / ${totalPages}`;
             document.getElementById('btnPrev').disabled = (currentPage === 1);
             document.getElementById('btnNext').disabled = (currentPage === totalPages);
@@ -134,11 +141,11 @@
         function changePage(direction) {
             currentPage += direction;
             renderLinks();
-            window.scrollTo({ top: 150, behavior: 'smooth' });
+            window.scrollTo({ top: 150, behavior: 'smooth' }); // Otomatis scroll ke atas list saat ganti halaman
         }
 
         function filterLinks() {
-            currentPage = 1; 
+            currentPage = 1; // Kembali ke halaman 1 setiap kali mengetik di pencarian
             renderLinks();
         }
     </script>
