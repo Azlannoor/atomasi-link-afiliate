@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="description" content="Tikatiwi Spill | Racun Shopee ✨ Cari nomor barangnya di sini!">
+    <meta property="og:title" content="Tikatiwi Spill | Racun Shopee ✨">
+    <meta property="og:description" content="Spill semua barang lucu yang lewat di FYP-mu! Cari nomor barangnya di sini.">
+    <meta property="og:image" content="https://i.ibb.co.com/4gm1HrWZ/0f0dc8330b7e1da6ca089a00ead40925-2.jpg">
+    <meta property="og:url" content="https://azlannoor.my.id">
+
+    <title>Tikatiwi Spill | Racun Shopee</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root { 
+            --primary-color: #ff85a2; /* Pink Soft */
+            --bg-color: #fcfcfc; /* Putih Bersih */
+            --text-color: #333; 
+            --card-bg: #ffffff;
+        }
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background-color: var(--bg-color); 
+            color: var(--text-color); 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            padding: 40px 20px; 
+            margin: 0; 
+            background-image: radial-gradient(#ffe0e9 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        /* --- PROFIL --- */
+        .profile-container {
+            width: 110px; height: 110px; 
+            border-radius: 50%; 
+            padding: 5px;
+            background: linear-gradient(45deg, #ff85a2, #ffc3a0); /* Efek Ring IG */
+            margin-bottom: 15px;
+        }
+        .profile-pic { 
+            width: 100%; height: 100%; 
+            border-radius: 50%; 
+            border: 3px solid white; 
+            box-sizing: border-box;
+            background-color: white;
+            /* FOTO PROFIL ASLI TIKATIWI */
+            background-image: url('https://i.ibb.co.com/4gm1HrWZ/0f0dc8330b7e1da6ca089a00ead40925-2.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        h1 { font-size: 1.4rem; margin: 5px 0; text-align: center; color: var(--text-color); font-weight: 600; }
+        p.bio { font-size: 0.9rem; color: #666; margin-bottom: 25px; text-align: center; max-width: 350px; line-height: 1.5; }
+        
+        .links-container { width: 100%; max-width: 450px; }
+        
+        /* --- DESAIN KOLOM PENCARIAN --- */
+        #searchInput {
+            width: 100%; padding: 14px 20px; margin-bottom: 25px; border-radius: 30px; 
+            border: 1px solid #ffe0e9; font-size: 0.95rem; text-align: center; outline: none;
+            transition: all 0.3s ease; box-sizing: border-box; background: var(--card-bg);
+            box-shadow: 0 4px 15px rgba(255, 133, 162, 0.08);
+            font-family: 'Poppins', sans-serif;
+        }
+        #searchInput:focus { border-color: var(--primary-color); box-shadow: 0 0 10px rgba(255, 133, 162, 0.2); }
+        
+        /* --- DESAIN KARTU LINK --- */
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(15px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        .link-card {
+            background: var(--card-bg); display: block; text-align: center; padding: 16px; margin-bottom: 12px; 
+            border-radius: 16px; text-decoration: none; color: var(--text-color); font-weight: 600; 
+            transition: all 0.3s ease; border: 1px solid #ffe0e9;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+            animation: fadeInUp 0.5s ease-out both;
+        }
+        .link-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(255, 133, 162, 0.15); border-color: var(--primary-color); }
+        .link-card span { display: block; margin-top: 5px; } /* Untuk Fitur Unggul */
+
+        /* --- DESAIN PAGINATION --- */
+        .pagination { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; margin-bottom: 30px; }
+        .pagination button { padding: 8px 20px; border: none; background: white; color: var(--primary-color); border: 1px solid var(--primary-color); border-radius: 20px; cursor: pointer; font-weight: 600; transition: all 0.3s; font-family: 'Poppins', sans-serif;}
+        .pagination button:hover { background: var(--primary-color); color: white; }
+        .pagination button:disabled { border-color: #ddd; color: #aaa; cursor: not-allowed; background: transparent; }
+        #pageInfo { font-size: 0.9rem; font-weight: 600; color: #888; }
+
+        .footer { margin-top: 10px; font-size: 0.8rem; color: #aaa; text-align: center; padding-bottom: 40px; }
+        
+        .social-link {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white !important; border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="profile-container">
+        <div class="profile-pic"></div>
+    </div>
+    
+    <h1>kartika pratiwi</h1>
+    <p class="bio">Tikatiwi Spill | Racun Shopee ✨<br>Spill semua barang lucu yang lewat di FYP-mu! Cari nomor barangnya di sini 👇</p>
+
+    <div class="links-container">
+        
+        <input type="text" id="searchInput" placeholder="🔍 Ketik nomor atau nama barang..." onkeyup="filterLinks()">
+        
+        <div id="linkWrapper">
+            <p style="text-align:center; font-size:0.85rem; color:#888;">Memuat racun shopee... ⏳</p>
+        </div>
+
+        <div class="pagination" id="paginationControls">
+            <button onclick="changePage(-1)" id="btnPrev">Mundur</button>
+            <span id="pageInfo">Hal 1 / 1</span>
+            <button onclick="changePage(1)" id="btnNext">Lanjut</button>
+        </div>
+
+        <a href="https://instagram.com/by.tikatiwi" class="link-card social-link" target="_blank">📸 Follow Instagram @by.tikatiwi</a>
+
+    </div>
+    
+    <div class="footer">© 2026 Tikatiwi. Managed by Abdul.</div>
+
+    <script>
+        const itemsPerPage = 10; 
+        let currentPage = 1;
+        let allProducts = [];
+
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                // MENGURUTKAN DATA (1, 2, 3...)
+                allProducts = data.sort((a, b) => {
+                    let angkaA = parseInt(a.nama) || 999999;
+                    let angkaB = parseInt(b.nama) || 999999;
+                    return angkaA - angkaB; 
+                });
+                renderLinks();
+            })
+            .catch(err => {
+                document.getElementById('linkWrapper').innerHTML = "<p style='text-align:center; color:red;'>Gagal memuat data produk.</p>";
+            });
+
+        function renderLinks() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const linkWrapper = document.getElementById('linkWrapper');
+            
+            const filteredProducts = allProducts.filter(p => {
+                return p.nama.toLowerCase().includes(searchTerm);
+            });
+
+            const totalPages = Math.ceil(filteredProducts.length / itemsPerPage) || 1;
+            if (currentPage > totalPages) currentPage = totalPages;
+            if (currentPage < 1) currentPage = 1;
+
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+
+            linkWrapper.innerHTML = ''; 
+
+            if (filteredProducts.length === 0) {
+                linkWrapper.innerHTML = "<p style='text-align:center; font-size:0.85rem; color:#888;'>Yah, barangnya nggak ketemu 😥</p>";
+            } else {
+                const pageItems = filteredProducts.slice(startIndex, endIndex);
+                pageItems.forEach(item => {
+                    const a = document.createElement('a');
+                    a.href = item.link;
+                    a.className = 'link-card';
+                    a.target = '_blank';
+                    a.innerHTML = item.nama; 
+                    linkWrapper.appendChild(a);
+                });
+            }
+
+            document.getElementById('pageInfo').innerText = `Hal ${currentPage} / ${totalPages}`;
+            document.getElementById('btnPrev').disabled = (currentPage === 1);
+            document.getElementById('btnNext').disabled = (currentPage === totalPages);
+        }
+
+        function changePage(direction) {
+            currentPage += direction;
+            renderLinks();
+            window.scrollTo({ top: 180, behavior: 'smooth' }); 
+        }
+
+        function filterLinks() {
+            currentPage = 1; 
+            renderLinks();
+        }
+    </script>
+</body>
+</html>
+
